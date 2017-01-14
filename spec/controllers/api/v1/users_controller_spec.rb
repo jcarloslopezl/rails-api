@@ -22,7 +22,7 @@ describe Api::V1::UsersController do
     context "when is successfully created" do
       before(:each) do
         @user_attributes = FactoryGirl.attributes_for :user
-        post :create, { user: @user_attributes }, format: :json
+        post :create, params: { user: @user_attributes }, format: :json
       end
 
       it "renders the json representation for the user record just created" do
@@ -38,7 +38,7 @@ describe Api::V1::UsersController do
         #notice I'm not including the email
         @invalid_user_attributes = { password: "12345678",
                                      password_confirmation: "12345678" }
-        post :create, { user: @invalid_user_attributes }, format: :json
+        post :create, params: { user: @invalid_user_attributes }, format: :json
       end
 
       it "renders an errors json" do
@@ -60,7 +60,7 @@ describe Api::V1::UsersController do
     context "when is successfully updated" do
       before(:each) do
         @user = FactoryGirl.create :user
-        patch :update, { id: @user.id,
+        patch :update, params: { id: @user.id,
                          user: { email: "newmail@example.com" } }, format: :json
       end
 
@@ -75,7 +75,7 @@ describe Api::V1::UsersController do
     context "when is not created" do
       before(:each) do
         @user = FactoryGirl.create :user
-        patch :update, { id: @user.id,
+        patch :update, params: { id: @user.id,
                          user: { email: "bademail.com" } }, format: :json
       end
 
@@ -92,5 +92,15 @@ describe Api::V1::UsersController do
       it { should respond_with 422 }
     end
   end
+
+  describe "DELETE #destroy" do
+	  before(:each) do
+	    @user = FactoryGirl.create :user
+	    delete :destroy, params: { id: @user.id }, format: :json
+	  end
+
+	  it { should respond_with 204 }
+
+	end
 
 end
