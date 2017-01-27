@@ -11,6 +11,10 @@ module Request
       request.headers['Accept'] = "application/api.lightsound.v#{version}"
     end
 
+    def api_authorization_header(token)
+      request.headers['Authorization'] = token
+    end
+
     def api_response_format(format = Mime[:json])
       request.headers['Accept'] = "#{request.headers['Accept']},#{format}"
       request.headers['Content-Type'] = format.to_s
