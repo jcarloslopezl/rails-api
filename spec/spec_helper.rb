@@ -6,6 +6,7 @@ require 'shoulda/matchers'
 
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
+    # Choose a test framework:
     with.test_framework :rspec
     with.library :rails
   end
@@ -67,11 +68,11 @@ RSpec.configure do |config|
   # https://relishapp.com/rspec/rspec-rails/v/3-0/docs
   config.infer_spec_type_from_file_location!
 
-  config.include Devise::Test::ControllerHelpers, :type => :controller
 
   #Including to test requests
   config.include Request::JsonHelpers, :type => :controller
   config.include Request::HeadersHelpers, :type => :controller
+  config.include Devise::Test::ControllerHelpers, :type => :controller
 
   config.before(:each, type: :controller) do
     include_default_accept_headers
