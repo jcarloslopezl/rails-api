@@ -76,11 +76,9 @@ describe Api::V1::UsersController do
       it { should respond_with 200 }
     end
 
-    context "when is not created" do
+    context "when is not updated" do
       before(:each) do
-        @user = FactoryGirl.create :user
-        patch :update, params: { id: @user.id,
-                         user: { email: "bademail.com" } }, format: :json
+        patch :update, params: { id: @user.id, user: { email: "bademail.com" } }
       end
 
       it "renders an errors json" do
