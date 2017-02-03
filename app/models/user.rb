@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   before_create :generate_authentication_token!
+
+  has_many :products, dependent: :destroy
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
