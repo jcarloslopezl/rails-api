@@ -5,10 +5,9 @@ module Request
     end
   end
 
-  # Our headers helpers module
   module HeadersHelpers
     def api_header(version = 1)
-      request.headers['Accept'] = "application/api.lightsound.v#{version}"
+      request.headers['Accept'] = "application/vnd.app.v#{version}"
     end
 
     def api_authorization_header(token)
