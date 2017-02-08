@@ -13,6 +13,7 @@ gem "devise"
 
 #Api gems
 gem 'active_model_serializers', '0.8.3'
+gem 'kaminari'
 
 group :test do
   gem "rspec-rails"
