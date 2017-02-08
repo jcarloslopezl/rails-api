@@ -14,6 +14,7 @@ gem "devise"
 #Api gems
 gem 'active_model_serializers', '0.8.3'
 gem 'kaminari'
+gem 'delayed_job_active_record'
 
 group :test do
   gem "rspec-rails"
