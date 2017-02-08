@@ -15,6 +15,12 @@ describe Api::V1::OrdersController do
       expect(orders_response).to have(4).items
     end
 
+    it { expect(json_response).to have_key(:meta) }
+    it { expect(json_response[:meta]).to have_key(:pagination) }
+    it { expect(json_response[:meta][:pagination]).to have_key(:per_page) }
+    it { expect(json_response[:meta][:pagination]).to have_key(:total_pages) }
+    it { expect(json_response[:meta][:pagination]).to have_key(:total_objects) }
+
     it { should respond_with 200 }
   end
 
@@ -54,7 +60,7 @@ describe Api::V1::OrdersController do
       product_1 = FactoryGirl.create :product
       product_2 = FactoryGirl.create :product
       order_params = { product_ids_and_quantities: [[product_1.id, 2],[ product_2.id, 3]] }
-      post :create, user_id: current_user.id, order: order_params
+      post :create, params: { user_id: current_user.id, order: order_params }
     end
 
     it "returns just user order record" do
