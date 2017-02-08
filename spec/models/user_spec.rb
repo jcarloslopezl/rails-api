@@ -16,6 +16,9 @@ describe User do
 	it { should validate_confirmation_of(:password) }
 	it { should allow_value('example@domain.com').for(:email) }
 
+  it { should have_many(:products) }
+  it { should have_many(:orders) }
+
   # we test the user actually respond to this attribute
   it { should respond_to(:auth_token) }
   
@@ -25,8 +28,8 @@ describe User do
   it { should have_many(:products) }
 
   describe "#generate_authentication_token!" do
-    it "generates a unique token" do
-      Devise.stub(:friendly_token).and_return("auniquetoken123")
+    it "generates a unique token" do      
+      allow(Devise).to receive(:friendly_token).and_return("auniquetoken123")
       @user.generate_authentication_token!
       expect(@user.auth_token).to eql "auniquetoken123"
     end

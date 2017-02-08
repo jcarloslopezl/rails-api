@@ -16,11 +16,11 @@ describe Api::V1::SessionsController do
       end
 
       it "returns the user record corresponding to the given credentials" do
-      #   @user.reload
-      #   expect(json_response[:auth_token]).to eql @user.auth_token
+        @user.reload
+        expect(json_response[:user][:auth_token]).to eql @user.auth_token
       end
 
-      # it { should respond_with 200 }
+      it { should respond_with 200 }
     end
 
     context "when the credentials are incorrect" do
